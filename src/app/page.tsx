@@ -1,5 +1,12 @@
-import { Box } from '@mui/material';
+import InboxHeader from '@/components/InboxHeader';
+import { Box, Grid } from '@mui/material';
 
 export default function Home() {
-    return <Box></Box>;
+    return (
+        <Grid container spacing={3}>
+            <Grid xs={12}>
+                <InboxHeader />
+            </Grid>
+        </Grid>
+    );
 }

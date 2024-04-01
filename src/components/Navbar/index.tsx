@@ -7,33 +7,35 @@ import Logo from '../Logo';
 
 export default function Navbar() {
     return (
-        <AppBar
-            position="relative"
-            sx={{
-                boxShadow: 3,
-                backgroundColor: 'white',
-            }}
-        >
-            <Toolbar>
-                <Logo />
-                <Stack ml="auto" direction="row" spacing={0.25} alignItems="center">
-                    <Badge badgeContent={10}>
-                        <IconButton>
-                            <NotificationsNoneIcon />
-                        </IconButton>
-                    </Badge>
+        <>
+            <AppBar
+                sx={{
+                    boxShadow: 3,
+                    backgroundColor: 'white',
+                }}
+            >
+                <Toolbar>
+                    <Logo />
+                    <Stack ml="auto" direction="row" spacing={0.25} alignItems="center">
+                        <Badge badgeContent={10}>
+                            <IconButton>
+                                <NotificationsNoneIcon />
+                            </IconButton>
+                        </Badge>
 
-                    <Badge badgeContent={5}>
-                        <IconButton>
-                            <ChatBubbleOutlineIcon />
-                        </IconButton>
-                    </Badge>
+                        <Badge badgeContent={5}>
+                            <IconButton>
+                                <ChatBubbleOutlineIcon />
+                            </IconButton>
+                        </Badge>
 
-                    <IconButton>
-                        <PowerSettingsNewIcon />
-                    </IconButton>
-                </Stack>
-            </Toolbar>
-        </AppBar>
+                        <IconButton>
+                            <PowerSettingsNewIcon />
+                        </IconButton>
+                    </Stack>
+                </Toolbar>
+            </AppBar>
+            <Toolbar />
+        </>
     );
 }

@@ -1,11 +1,11 @@
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 import theme from '@/theme';
+import { Container, Stack } from '@mui/material';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import type { Metadata } from 'next';
 import './globals.css';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import Navbar from '@/components/Navbar';
-import { Box, Stack } from '@mui/material';
-import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
     title: 'AI for Sales Prospecting - Generative AI Sales Tools | SalesMind AI',
@@ -19,9 +19,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body>
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={theme}>
-                        <Stack spacing={3} minHeight="100vh" height="100%">
+                        <Stack minHeight="100vh" height="100%" spacing={3}>
                             <Navbar />
-                            <Box sx={{ flexGrow: 1 }}>{children}</Box>
+                            <Container sx={{ flexGrow: 1, alignSelf: 'center' }}>{children}</Container>
                             <Footer />
                         </Stack>
                     </ThemeProvider>
