@@ -6,7 +6,7 @@ const nunito = Nunito({
     subsets: ['latin'],
 });
 
-const theme = createTheme({
+let theme = createTheme({
     palette: {
         primary: {
             main: '#3F0035',
@@ -19,5 +19,18 @@ const theme = createTheme({
         fontFamily: nunito.style.fontFamily,
     },
 });
+
+// theme = createTheme(theme, {
+//     components: {
+//         MuiAppBar: {
+//             styleOverrides: {
+//                 root: {
+//                     boxShadow: theme.shadows[3],
+//                     backgroundColor: 'white',
+//                 },
+//             },
+//         },
+//     },
+// });
 
 export default theme;
