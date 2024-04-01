@@ -8,7 +8,7 @@ import Logo from '../Logo';
 export default function Navbar() {
     return (
         <AppBar
-            // position="static"
+            position="relative"
             sx={{
                 boxShadow: 3,
                 backgroundColor: 'white',

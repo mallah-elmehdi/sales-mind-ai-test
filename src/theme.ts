@@ -20,17 +20,4 @@ let theme = createTheme({
     },
 });
 
-// theme = createTheme(theme, {
-//     components: {
-//         MuiAppBar: {
-//             styleOverrides: {
-//                 root: {
-//                     boxShadow: theme.shadows[3],
-//                     backgroundColor: 'white',
-//                 },
-//             },
-//         },
-//     },
-// });
-
 export default theme;

@@ -4,7 +4,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import Navbar from '@/components/Navbar';
-import { Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
     title: 'AI for Sales Prospecting - Generative AI Sales Tools | SalesMind AI',
@@ -18,9 +19,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body>
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={theme}>
-                        <Stack>
+                        <Stack spacing={3} minHeight="100vh" height="100%">
                             <Navbar />
-                            {children}
+                            <Box sx={{ flexGrow: 1 }}>{children}</Box>
+                            <Footer />
                         </Stack>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
