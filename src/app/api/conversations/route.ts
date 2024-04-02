@@ -1,4 +1,4 @@
-import { getRandomActionStatus, getRandomCampaign, getRandomCity, getRandomCompany } from '@/utils/helpers';
+import { getRandomActionStatus, getRandomBoolean, getRandomCampaign, getRandomCity, getRandomCompany } from '@/utils/helpers';
 import {
     getRandomName,
     getRandomJobTitle,
@@ -28,12 +28,14 @@ const getFakeChat = () => {
                     units: 'words',
                     format: 'plain',
                 }),
+                isReply: getRandomBoolean(),
             });
         } else {
             chat.push({
                 isAction: true,
                 time: timeFormatting(getRandomDate()),
                 status: getRandomActionStatus(),
+                isReply: getRandomBoolean(),
             });
         }
     }
@@ -66,7 +68,7 @@ for (let i = 0; i < 33; i++) {
 
         company: getRandomCompany(),
         location: getRandomCity(),
-        conversation: FakeChatForExample,
+        messages: FakeChatForExample,
     });
 }
 

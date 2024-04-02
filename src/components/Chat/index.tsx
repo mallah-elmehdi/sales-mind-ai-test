@@ -1,13 +1,12 @@
 import { Conversation } from '@/types/conversation';
-import React from 'react';
-import Card from '../Card';
-import ChatHeader from './ChatHeader';
 import { Divider, Stack } from '@mui/material';
+import Card from '../Card';
 import ChatBody from './ChatBody';
+import ChatHeader from './ChatHeader';
 
 const Chat = ({ conversation }: { conversation: Conversation }) => {
     return (
-        <Card sx={{ maxHeight: 400, height: '100%' }}>
+        <Card>
             <Stack spacing={2} divider={<Divider sx={{ width: '100%' }} />}>
                 <ChatHeader
                     status={conversation.status}
@@ -15,7 +14,7 @@ const Chat = ({ conversation }: { conversation: Conversation }) => {
                     company={conversation.company}
                     location={conversation.location}
                 />
-                <ChatBody />
+                <ChatBody sender={conversation.sender} lead={conversation.lead} messages={conversation.messages} />
             </Stack>
         </Card>
     );

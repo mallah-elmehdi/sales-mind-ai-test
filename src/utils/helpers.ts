@@ -112,6 +112,10 @@ export const getRandomDate = () => {
     return new Date(randomTimestamp);
 };
 
+export const getRandomBoolean = () => {
+    return Math.random() < 0.5;
+};
+
 export const getRandomStatus = () => {
     const status = STATUS;
 
@@ -135,12 +139,13 @@ export const getRandomActionStatus = () => {
 
 export const dateFormatting = (_date: Date) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const date = new Date(_date);
+    const dateObj = new Date(_date);
 
     return {
-        month: months[date.getMonth()],
-        year: date.getFullYear(),
-        day: date.getDate().toString().length === 1 ? '0' + date.getDate() : date.getDate(),
+        month: months[dateObj.getMonth()],
+        year: dateObj.getFullYear(),
+        day: dateObj.getDate().toString().length === 1 ? '0' + dateObj.getDate() : dateObj.getDate(),
+        date: dateObj.toLocaleDateString([], { weekday: 'long' }),
     };
 };
 
