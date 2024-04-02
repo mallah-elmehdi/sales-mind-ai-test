@@ -34,6 +34,43 @@ export const getRandomJobTitle = () => {
     return jobs[randomIndex];
 };
 
+export const getRandomCompany = () => {
+    const companies = [
+        'Google',
+        'Facebook',
+        'Amazon',
+        'Apple',
+        'Microsoft',
+        'Sales Mind AI',
+        'Tesla',
+        'Netflix',
+        'Uber',
+        'Airbnb',
+        'Twitter',
+    ];
+
+    const randomIndex = Math.floor(Math.random() * companies.length);
+    return companies[randomIndex];
+};
+
+export const getRandomCity = () => {
+    const cities = [
+        'Bangkok',
+        'Phuket',
+        'Chiang Mai',
+        'Pattaya',
+        'Krabi',
+        'Hua Hin',
+        'Koh Samui',
+        'Ayutthaya',
+        'Nakhon Ratchasima',
+        'Udon Thani',
+    ];
+
+    const randomIndex = Math.floor(Math.random() * cities.length);
+    return cities[randomIndex];
+};
+
 export const getRandomCampaign = () => {
     const campaigns = [
         'Software Engineer in Bangkok',
@@ -80,6 +117,20 @@ export const getRandomStatus = () => {
 
     const randomIndex = Math.floor(Math.random() * status.length);
     return status[randomIndex];
+};
+
+export const getRandomActionStatus = () => {
+    const actionStatuses = [
+        'Visited your profile',
+        'Liked your post',
+        'Sent you a message',
+        'Commented on your photo',
+        'Followed you',
+        'Shared your content',
+    ];
+
+    const randomIndex = Math.floor(Math.random() * actionStatuses.length);
+    return actionStatuses[randomIndex];
 };
 
 export const dateFormatting = (_date: Date) => {

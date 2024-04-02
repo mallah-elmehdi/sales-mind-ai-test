@@ -10,6 +10,13 @@ export interface Sender {
     avatar: string;
 }
 
+export interface Message {
+    time: string;
+    isAction: boolean;
+    body?: string;
+    status?: string;
+}
+
 export interface Conversation {
     id: string;
     lead: Lead;
@@ -17,4 +24,7 @@ export interface Conversation {
     lastMessage: string;
     status: string;
     sender: Sender;
+    company: string;
+    location: string;
+    conversation: Message[];
 }

@@ -4,9 +4,16 @@ import SenderInfo from '@/components/SenderInfo';
 import Tag from '@/components/Tag';
 import { Conversation } from '@/types/conversation';
 import { DataGrid } from '@mui/x-data-grid';
+import { useContext } from 'react';
 import Action from './Action';
+import { ConversationContext } from '@/components/ConversationArea';
 
 const ConversationList = ({ data }: { data: Conversation[] }) => {
+    let context = useContext(ConversationContext);
+    if (context === null) throw new Error('context is null');
+
+    const { openChat } = context;
+
     return (
         <DataGrid
             hideFooter
@@ -19,9 +26,11 @@ const ConversationList = ({ data }: { data: Conversation[] }) => {
                     alignItems: 'center',
                     display: 'flex',
                 },
+                maxHeight: 700,
+                overflow: 'auto',
             }}
             disableRowSelectionOnClick
-            onRowClick={({ id }) => console.log(id)}
+            onRowClick={({ id }) => openChat(id.toString())}
             checkboxSelection
             rowHeight={80}
             columns={[
@@ -38,7 +47,7 @@ const ConversationList = ({ data }: { data: Conversation[] }) => {
                     flex: 1,
                     field: 'status',
                     renderCell: ({ value }) => {
-                        return <Tag status={value} />;
+                        return <Tag status={value} fullWidth={true} />;
                     },
                 },
                 {

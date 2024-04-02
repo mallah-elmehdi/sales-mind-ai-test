@@ -9,7 +9,13 @@ const getChipColors = (status: string): string => {
     return 'default';
 };
 
-const Tag = ({ status }: { status: string }) => {
-    return <Chip size="small" sx={{ backgroundColor: getChipColors(status), color: 'white', width: '100%' }} label={status} />;
+const Tag = ({ status, fullWidth }: { status: string; fullWidth?: Boolean }) => {
+    return (
+        <Chip
+            size="small"
+            sx={{ backgroundColor: getChipColors(status), color: 'white', width: fullWidth ? '100%' : 'fit-content' }}
+            label={status}
+        />
+    );
 };
 export default Tag;

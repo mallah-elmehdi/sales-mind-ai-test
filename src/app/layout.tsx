@@ -13,7 +13,10 @@ export const metadata: Metadata = {
         'Streamline your outreach and close more deals with our cutting-edge AI software for sales prospecting. Discover all our generative AI sales tools now!',
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+    inboxHeader,
+    conversation,
+}: Readonly<{ inboxHeader: React.ReactNode; conversation: React.ReactNode }>) {
     return (
         <html lang="en">
             <body>
@@ -21,7 +24,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     <ThemeProvider theme={theme}>
                         <Stack minHeight="100vh" height="100%" spacing={3}>
                             <Navbar />
-                            <Box sx={{ flexGrow: 1, alignSelf: 'center', px: 3 }}>{children}</Box>
+                            <Box sx={{ flexGrow: 1, alignSelf: 'center', px: 3 }} width="100%">
+                                <Stack spacing={3}>
+                                    {inboxHeader}
+                                    {conversation}
+                                </Stack>
+                            </Box>
                             <Footer />
                         </Stack>
                     </ThemeProvider>

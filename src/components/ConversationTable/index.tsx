@@ -1,20 +1,29 @@
+import { Grid } from '@mui/material';
+import Filter from './Filter';
+import SelectedAction from './SelectedAction';
+import ConversationList from './ConversationList';
+import { Conversation } from '@/types/conversation';
+import React, { memo } from 'react';
 import Card from '../Card';
-import DataTable from './DataTable';
 
-const getConversationData = async () => {
-    const res = await fetch('http://localhost:3000/api/conversations', { cache: 'no-cache' });
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-    return res.json();
-};
-
-export default async function ConversationTable() {
-    const data = await getConversationData();
+const ConversationTable = ({ data }: { data: Conversation[] }) => {
+    console.log('render');
 
     return (
         <Card>
-            <DataTable data={data.data} />
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <Filter />
+                </Grid>
+                <Grid item xs={12}>
+                    <SelectedAction />
+                </Grid>
+                <Grid item xs={12}>
+                    <ConversationList data={data} />
+                </Grid>
+            </Grid>
         </Card>
     );
-}
+};
+
+export default memo(ConversationTable);
