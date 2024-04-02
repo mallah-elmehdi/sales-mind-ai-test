@@ -7,13 +7,14 @@ export type ChatBodyType = {
     messages: Message[];
     lead: Lead;
     sender: Sender;
+    id: string;
 };
 
 const ChatBody = (props: ChatBodyType) => {
     useEffect(() => {
         var chatBody = document.getElementById('chat-body');
         if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-    }, []);
+    }, [props.id]);
 
     return (
         <Stack id="chat-body" spacing={2} height="100%" maxHeight={700} sx={{ overflow: 'auto' }}>

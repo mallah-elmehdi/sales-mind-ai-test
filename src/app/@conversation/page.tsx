@@ -11,8 +11,5 @@ const getConversationData = async () => {
 export default async function ConversationTable() {
     const data = await getConversationData();
 
-    console.log(data);
-    
-
     return <ConversationArea data={data.data} />;
 }

@@ -14,7 +14,7 @@ const Chat = ({ conversation }: { conversation: Conversation }) => {
                     company={conversation.company}
                     location={conversation.location}
                 />
-                <ChatBody sender={conversation.sender} lead={conversation.lead} messages={conversation.messages} />
+                <ChatBody id={conversation.id} sender={conversation.sender} lead={conversation.lead} messages={conversation.messages} />
             </Stack>
         </Card>
     );
