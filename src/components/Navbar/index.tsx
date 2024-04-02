@@ -9,6 +9,7 @@ export default function Navbar() {
     return (
         <>
             <AppBar
+                position="relative"
                 sx={{
                     boxShadow: 3,
                     backgroundColor: 'white',
@@ -35,7 +36,6 @@ export default function Navbar() {
                     </Stack>
                 </Toolbar>
             </AppBar>
-            <Toolbar />
         </>
     );
 }

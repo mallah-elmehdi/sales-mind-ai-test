@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import theme from '@/theme';
-import { Container, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import type { Metadata } from 'next';
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     <ThemeProvider theme={theme}>
                         <Stack minHeight="100vh" height="100%" spacing={3}>
                             <Navbar />
-                            <Container sx={{ flexGrow: 1, alignSelf: 'center' }}>{children}</Container>
+                            <Box sx={{ flexGrow: 1, alignSelf: 'center', px: 3 }}>{children}</Box>
                             <Footer />
                         </Stack>
                     </ThemeProvider>
