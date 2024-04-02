@@ -1,4 +1,5 @@
 import { STATUS } from '@/constants/programme';
+import { SentViaEnum } from '@/types/conversation';
 
 export const getRandomName = () => {
     const firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Emma', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack'];
@@ -136,6 +137,17 @@ export const getRandomActionStatus = () => {
     const randomIndex = Math.floor(Math.random() * actionStatuses.length);
     return actionStatuses[randomIndex];
 };
+
+export const getRandomMessagingMethod = () => {
+    const messagingMethod = Object.values(SentViaEnum);
+
+    const rotationRounds = Math.floor(Math.random() * messagingMethod.length);
+    const randomIndex = Math.floor(Math.random() * messagingMethod.length);
+
+    return messagingMethod.slice(rotationRounds).concat(messagingMethod.slice(0, rotationRounds)).slice(0, randomIndex);
+};
+
+getRandomMessagingMethod;
 
 export const dateFormatting = (_date: Date) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

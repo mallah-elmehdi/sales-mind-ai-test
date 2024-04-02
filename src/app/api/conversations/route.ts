@@ -1,4 +1,4 @@
-import { getRandomActionStatus, getRandomBoolean, getRandomCampaign, getRandomCity, getRandomCompany } from '@/utils/helpers';
+import { getRandomActionStatus, getRandomBoolean, getRandomCampaign, getRandomCity, getRandomCompany, getRandomMessagingMethod } from '@/utils/helpers';
 import {
     getRandomName,
     getRandomJobTitle,
@@ -23,6 +23,7 @@ const getFakeChat = () => {
             chat.push({
                 time: timeFormatting(getRandomDate()),
                 isAction: false,
+                sentVia: getRandomMessagingMethod(),
                 body: loremIpsum({
                     count: getRandomNumber(),
                     units: 'words',
