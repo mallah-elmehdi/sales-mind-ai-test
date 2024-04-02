@@ -1,4 +1,11 @@
-import { getRandomActionStatus, getRandomBoolean, getRandomCampaign, getRandomCity, getRandomCompany, getRandomMessagingMethod } from '@/utils/helpers';
+import {
+    getRandomActionStatus,
+    getRandomBoolean,
+    getRandomCampaign,
+    getRandomCity,
+    getRandomCompany,
+    getRandomMessagingMethod,
+} from '@/utils/helpers';
 import {
     getRandomName,
     getRandomJobTitle,
@@ -13,7 +20,6 @@ import { v4 as getUuid } from 'uuid';
 import { loremIpsum } from 'lorem-ipsum';
 
 let FakeDataForExample = [];
-let FakeChatForExample = [];
 
 const getFakeChat = () => {
     let chat = [];
@@ -43,12 +49,18 @@ const getFakeChat = () => {
     return chat;
 };
 
-for (let i = 0; i < 33; i++) {
-    FakeChatForExample.push({
-        date: getRandomDate(),
-        chat: getFakeChat(),
-    });
-}
+const getMessages = () => {
+    let FakeMessagesForExample = [];
+
+    for (let i = 0; i < 12; i++) {
+        FakeMessagesForExample.push({
+            date: getRandomDate(),
+            chat: getFakeChat(),
+        });
+    }
+
+    return FakeMessagesForExample;
+};
 
 for (let i = 0; i < 33; i++) {
     FakeDataForExample.push({
@@ -69,7 +81,7 @@ for (let i = 0; i < 33; i++) {
 
         company: getRandomCompany(),
         location: getRandomCity(),
-        messages: FakeChatForExample,
+        messages: getMessages(),
     });
 }
 
