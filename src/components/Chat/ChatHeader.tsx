@@ -1,5 +1,6 @@
 import { Lead } from '@/types/conversation';
-import { Avatar, Stack, Typography } from '@mui/material';
+import { Avatar, Stack, Typography, IconButton } from '@mui/material';
+import { Close } from '@mui/icons-material';
 import React from 'react';
 import Tag from '../Tag';
 
@@ -18,6 +19,12 @@ const ChatHeader = ({ lead, company, location, status }: ChatHeaderType) => {
                     <Typography color="grey.600" lineHeight={1} variant="body2">
                         Occupation: {lead.occupation}
                     </Typography>
+                </Stack>
+
+                <Stack spacing={0.5} direction="row">
+                    <IconButton>
+                        <Close />
+                    </IconButton>
                 </Stack>
             </Stack>
 
