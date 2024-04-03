@@ -26,7 +26,7 @@ const ConversationList = ({ data }: { data: Conversation[] }) => {
                     alignItems: 'center',
                     display: 'flex',
                 },
-                maxHeight: 700,
+                maxHeight: 2000,
                 overflow: 'auto',
             }}
             disableRowSelectionOnClick

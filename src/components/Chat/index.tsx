@@ -3,6 +3,7 @@ import { Divider, Stack } from '@mui/material';
 import Card from '../Card';
 import ChatBody from './ChatBody';
 import ChatHeader from './ChatHeader';
+import ChatControl from './ChatControl';
 
 const Chat = ({ conversation }: { conversation: Conversation }) => {
     return (
@@ -15,6 +16,8 @@ const Chat = ({ conversation }: { conversation: Conversation }) => {
                     location={conversation.location}
                 />
                 <ChatBody id={conversation.id} sender={conversation.sender} lead={conversation.lead} messages={conversation.messages} />
+
+                <ChatControl />
             </Stack>
         </Card>
     );
