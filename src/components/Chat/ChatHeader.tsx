@@ -4,9 +4,9 @@ import { Close } from '@mui/icons-material';
 import React from 'react';
 import Tag from '../Tag';
 
-type ChatHeaderType = { lead: Lead; company: string; location: string; status: string };
+type ChatHeaderType = { lead: Lead; company: string; location: string; status: string; onClose?: () => void };
 
-const ChatHeader = ({ lead, company, location, status }: ChatHeaderType) => {
+const ChatHeader = ({ lead, company, location, status, onClose }: ChatHeaderType) => {
     return (
         <Stack>
             <Stack direction="row" spacing={1} alignItems="center">
@@ -22,7 +22,7 @@ const ChatHeader = ({ lead, company, location, status }: ChatHeaderType) => {
                 </Stack>
 
                 <Stack spacing={0.5} direction="row">
-                    <IconButton>
+                    <IconButton onClick={onClose}>
                         <Close />
                     </IconButton>
                 </Stack>

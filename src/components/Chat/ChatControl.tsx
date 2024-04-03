@@ -3,7 +3,7 @@ import { BORDER_RADIUS } from '@/constants/standard';
 import { Message } from '@/types/conversation';
 import { Cached, Send } from '@mui/icons-material';
 import { Button, ButtonGroup, Grid, MenuItem, Stack, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useTransition } from 'react';
 import AddImageMenu from '../AddImageMenu';
 import AttachedFileMenu from '../AttachedFileMenu';
 import EmojiMenu from '../EmojiMenu';
@@ -18,6 +18,7 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
     const [type, setType] = useState('ICE_BREAKER');
     const [variant, setVariant] = useState(0);
     const [text, setText] = useState('');
+    const [isPending, startTransition] = useTransition();
 
     const handleTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setType(event.target.value);
@@ -29,7 +30,7 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
         setText(event.target.value);
     };
 
-    const handleSendMessage = () => {
+    const handleSendMessage = useCallback((text: string) => {
         fetch(`http://localhost:3000/api/conversations`, {
             method: 'POST',
             body: JSON.stringify({
@@ -39,9 +40,9 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
         })
             .then((response) => response.json())
             .then((data) => onNewMessage(data.data));
-    };
+    }, []);
 
-    useEffect(() => {
+    const handleGetAISuggestionMessage = useCallback((type: string, variant: number) => {
         fetch(`http://localhost:3000/api/ai?variant=${variant}&type=${type}`)
             .then((res) => {
                 if (res.ok) {
@@ -55,6 +56,12 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
             .catch((error) => {
                 console.log(error);
             });
+    }, []);
+
+    useEffect(() => {
+        startTransition(() => {
+            handleGetAISuggestionMessage(type, variant);
+        });
     }, [type, variant]);
 
     return (
@@ -124,7 +131,7 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
                 </BorderedCard>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="contained" onClick={() => handleSendMessage()} fullWidth startIcon={<Send />}>
+                <Button variant="contained" onClick={() => handleSendMessage(text)} fullWidth startIcon={<Send />}>
                     Send
                 </Button>
             </Grid>

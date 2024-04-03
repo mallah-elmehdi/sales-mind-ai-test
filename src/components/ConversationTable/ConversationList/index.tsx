@@ -12,7 +12,7 @@ const ConversationList = ({ data }: { data: Conversation[] }) => {
     let context = useContext(ConversationContext);
     if (context === null) throw new Error('context is null');
 
-    const { openChat } = context;
+    const { openChat, toggleDrawer } = context;
 
     return (
         <DataGrid
@@ -30,7 +30,10 @@ const ConversationList = ({ data }: { data: Conversation[] }) => {
                 overflow: 'auto',
             }}
             disableRowSelectionOnClick
-            onRowClick={({ id }) => openChat(id.toString())}
+            onRowClick={({ id }) => {
+                openChat(id.toString());
+                toggleDrawer(true);
+            }}
             checkboxSelection
             rowHeight={80}
             columns={[

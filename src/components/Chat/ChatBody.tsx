@@ -11,7 +11,7 @@ export type ChatBodyType = {
 
 const ChatBody = (props: ChatBodyType) => {
     return (
-        <Stack id="chat-body" spacing={2} height="100%" maxHeight={700} sx={{ overflow: 'auto' }}>
+        <Stack id="chat-body" spacing={2} height="100%" maxHeight={700} flexGrow={1} sx={{ overflow: 'auto' }}>
             <ChatBodyContent {...props} />
         </Stack>
     );
