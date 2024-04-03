@@ -1,8 +1,12 @@
 import BorderedCard from '@/components/BorderedCard';
-import { Chat, Message } from '@/types/conversation';
-import { Send } from '@mui/icons-material';
-import { Button, ButtonGroup, Grid, MenuItem, TextField } from '@mui/material';
+import { BORDER_RADIUS } from '@/constants/standard';
+import { Message } from '@/types/conversation';
+import { Cached, Send } from '@mui/icons-material';
+import { Button, ButtonGroup, Grid, MenuItem, Stack, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import AddImageMenu from '../AddImageMenu';
+import AttachedFileMenu from '../AttachedFileMenu';
+import EmojiMenu from '../EmojiMenu';
 
 const buttonStyling = { textTransform: 'lowercase', width: '100%' };
 const getVariant = (isValid: boolean) => {
@@ -90,6 +94,27 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
                         value={text}
                         onChange={handleTextChange}
                     />
+                    <Stack direction="row" spacing={1} mt={2} justifyContent="space-between" alignItems="center">
+                        <Stack direction="row" spacing={1} mt={2} alignItems="center">
+                            <EmojiMenu addEmoji={(emoji) => setText(text + emoji)} />
+                            <AttachedFileMenu />
+                            <AddImageMenu />
+                        </Stack>
+                        <Button
+                            endIcon={<Cached />}
+                            variant="contained"
+                            sx={{
+                                borderRadius: BORDER_RADIUS.full,
+                                backgroundColor: 'grey.500',
+                                textTransform: 'lowercase',
+                                '&:hover': {
+                                    backgroundColor: 'grey.500',
+                                },
+                            }}
+                        >
+                            Regenerate respond
+                        </Button>
+                    </Stack>
                 </BorderedCard>
             </Grid>
             <Grid item xs={12}>
