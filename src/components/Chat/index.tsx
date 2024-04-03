@@ -1,30 +1,10 @@
 import { Conversation } from '@/types/conversation';
-import { Divider, Stack, useMediaQuery, useTheme, Drawer, Box } from '@mui/material';
-import Card from '../Card';
-import ChatArea from './ChatArea';
-import ChatHeader from './ChatHeader';
-import { useContext } from 'react';
+import { Drawer, useMediaQuery, useTheme } from '@mui/material';
+import { lazy, useContext } from 'react';
 import { ConversationContext } from '../ConversationArea';
+const ChatCard = lazy(() => import('./ChatCard'));
 
-type PropsType = { conversation: Conversation; onClose?: () => void };
-
-const ChatCard = ({ conversation, onClose }: PropsType) => {
-    return (
-        <Card sx={{ overflow: 'auto' }}>
-            <Stack spacing={2}>
-                <ChatHeader
-                    status={conversation.status}
-                    lead={conversation.lead}
-                    company={conversation.company}
-                    location={conversation.location}
-                    onClose={onClose}
-                />
-                <Divider sx={{ width: '100%' }} />
-                <ChatArea id={conversation.id} sender={conversation.sender} lead={conversation.lead} messages={conversation.messages} />
-            </Stack>
-        </Card>
-    );
-};
+export type PropsType = { conversation: Conversation; onClose?: () => void };
 
 const Chat = ({ conversation }: PropsType) => {
     const theme = useTheme();

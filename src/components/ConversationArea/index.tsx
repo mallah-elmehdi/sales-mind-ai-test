@@ -4,7 +4,7 @@ import ConversationTable from '@/components/ConversationTable';
 import NoChat from '@/components/NoChat';
 import { Conversation } from '@/types/conversation';
 import { Grid } from '@mui/material';
-import React, { createContext } from 'react';
+import React, { createContext, useCallback } from 'react';
 
 type ConversationContextType = {
     openChat: (id: string) => void;
@@ -18,7 +18,8 @@ export const ConversationContext = createContext<ConversationContextType | null>
 const ConversationArea = ({ data }: { data: Conversation[] }) => {
     const [conversation, setConversation] = React.useState<Conversation | null>(null);
     const [openDrawer, setOpenDrawer] = React.useState(false);
-    const handleOpenConversation = (id: string) => setConversation(data.find((item) => item.id === id) || null);
+
+    const handleOpenConversation = useCallback((id: string) => setConversation(data.find((item) => item.id === id) || null), []);
     const handleCloseConversation = () => setConversation(null);
     const toggleDrawer = (newOpen: boolean) => setOpenDrawer(newOpen);
 

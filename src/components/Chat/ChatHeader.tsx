@@ -1,12 +1,12 @@
 import { Lead } from '@/types/conversation';
-import { Avatar, Stack, Typography, IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import React from 'react';
+import { Avatar, IconButton, Stack, Typography } from '@mui/material';
 import Tag from '../Tag';
 
 type ChatHeaderType = { lead: Lead; company: string; location: string; status: string; onClose?: () => void };
 
 const ChatHeader = ({ lead, company, location, status, onClose }: ChatHeaderType) => {
+
     return (
         <Stack>
             <Stack direction="row" spacing={1} alignItems="center">

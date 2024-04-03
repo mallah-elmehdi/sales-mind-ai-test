@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import ChatBody, { ChatBodyType } from './ChatBody';
-import ChatControl from './ChatControl';
-import { Chat, Message } from '@/types/conversation';
+import { Message } from '@/types/conversation';
 import { Divider } from '@mui/material';
+import { lazy, useEffect, useState } from 'react';
+import { ChatBodyType } from './ChatBody';
+import ChatControl from './ChatControl';
+const ChatBody = lazy(() => import('./ChatBody'));
 
 const ChatArea = ({ lead, messages, sender, id }: ChatBodyType) => {
     const [messagesStack, setMessagesStack] = useState<Message[]>(messages);

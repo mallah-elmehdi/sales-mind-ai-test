@@ -1,12 +1,12 @@
 'use client';
+import { ConversationContext } from '@/components/ConversationArea';
 import LeadInfo from '@/components/LeadInfo';
 import SenderInfo from '@/components/SenderInfo';
 import Tag from '@/components/Tag';
 import { Conversation } from '@/types/conversation';
 import { DataGrid } from '@mui/x-data-grid';
-import { useContext } from 'react';
+import { memo, useContext } from 'react';
 import Action from './Action';
-import { ConversationContext } from '@/components/ConversationArea';
 
 const ConversationList = ({ data }: { data: Conversation[] }) => {
     let context = useContext(ConversationContext);
@@ -84,4 +84,4 @@ const ConversationList = ({ data }: { data: Conversation[] }) => {
     );
 };
 
-export default ConversationList;
+export default memo(ConversationList);
