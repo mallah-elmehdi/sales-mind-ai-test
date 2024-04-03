@@ -138,7 +138,7 @@ export const getRandomActionStatus = () => {
     return actionStatuses[randomIndex];
 };
 
-export const getRandomMessagingMethod = () => {
+export const getRandomMessagingMethod = (): SentViaEnum[] => {
     const messagingMethod = Object.values(SentViaEnum);
 
     const rotationRounds = Math.floor(Math.random() * messagingMethod.length);
@@ -146,8 +146,6 @@ export const getRandomMessagingMethod = () => {
 
     return messagingMethod.slice(rotationRounds).concat(messagingMethod.slice(0, rotationRounds)).slice(0, randomIndex);
 };
-
-getRandomMessagingMethod;
 
 export const dateFormatting = (_date: Date) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

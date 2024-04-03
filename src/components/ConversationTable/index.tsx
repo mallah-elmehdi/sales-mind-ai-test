@@ -7,8 +7,6 @@ import React, { memo } from 'react';
 import Card from '../Card';
 
 const ConversationTable = ({ data }: { data: Conversation[] }) => {
-    console.log('render');
-
     return (
         <Card>
             <Grid container spacing={3}>

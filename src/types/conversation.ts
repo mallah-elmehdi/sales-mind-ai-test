@@ -10,12 +10,12 @@ export interface Sender {
     avatar: string;
 }
 export interface Chat {
-    time: string;
+    time: Date;
     isAction: boolean;
     body?: string;
     status?: string;
     isReply: boolean;
-    sentVia: SentViaEnum[];
+    sentVia?: SentViaEnum[];
 }
 export interface Message {
     date: Date;

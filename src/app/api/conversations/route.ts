@@ -1,25 +1,24 @@
+import { Conversation } from '@/types/conversation';
 import {
     getRandomActionStatus,
+    getRandomAvatar,
     getRandomBoolean,
     getRandomCampaign,
     getRandomCity,
     getRandomCompany,
-    getRandomMessagingMethod,
-} from '@/utils/helpers';
-import {
-    getRandomName,
-    getRandomJobTitle,
-    timeFormatting,
     getRandomDate,
-    getRandomStatus,
-    getRandomAvatar,
+    getRandomJobTitle,
+    getRandomMessagingMethod,
+    getRandomName,
     getRandomNumber,
+    getRandomStatus,
+    timeFormatting,
 } from '@/utils/helpers';
-import { NextResponse } from 'next/server';
-import { v4 as getUuid } from 'uuid';
+import fs from 'fs';
 import { loremIpsum } from 'lorem-ipsum';
-
-let FakeDataForExample = [];
+import { NextResponse } from 'next/server';
+import path from 'path';
+import { v4 as getUuid } from 'uuid';
 
 const getFakeChat = () => {
     let chat = [];
@@ -27,7 +26,7 @@ const getFakeChat = () => {
     for (let i = 0; i < 10; i++) {
         if (i % 3) {
             chat.push({
-                time: timeFormatting(getRandomDate()),
+                time: getRandomDate(),
                 isAction: false,
                 sentVia: getRandomMessagingMethod(),
                 body: loremIpsum({
@@ -40,7 +39,7 @@ const getFakeChat = () => {
         } else {
             chat.push({
                 isAction: true,
-                time: timeFormatting(getRandomDate()),
+                time: getRandomDate(),
                 status: getRandomActionStatus(),
                 isReply: getRandomBoolean(),
             });
@@ -62,29 +61,77 @@ const getMessages = () => {
     return FakeMessagesForExample;
 };
 
-for (let i = 0; i < 33; i++) {
-    FakeDataForExample.push({
-        id: getUuid(),
-        lead: {
-            name: getRandomName(),
-            avatar: getRandomAvatar(),
-            occupation: getRandomJobTitle(),
-            messagesLength: getRandomNumber(),
-        },
-        campaign: getRandomCampaign(),
-        lastMessage: timeFormatting(getRandomDate()),
-        status: getRandomStatus(),
-        sender: {
-            name: getRandomName(),
-            avatar: getRandomAvatar(),
-        },
+const getData = () => {
+    let data = [];
+    for (let i = 0; i < 33; i++) {
+        data.push({
+            id: getUuid(),
+            lead: {
+                name: getRandomName(),
+                avatar: getRandomAvatar(),
+                occupation: getRandomJobTitle(),
+                messagesLength: getRandomNumber(),
+            },
+            campaign: getRandomCampaign(),
+            lastMessage: timeFormatting(getRandomDate()),
+            status: getRandomStatus(),
+            sender: {
+                name: getRandomName(),
+                avatar: getRandomAvatar(),
+            },
+            company: getRandomCompany(),
+            location: getRandomCity(),
+            messages: getMessages(),
+        });
+    }
+    return data;
+};
 
-        company: getRandomCompany(),
-        location: getRandomCity(),
-        messages: getMessages(),
-    });
-}
+const filePath = path.join('./src/constants', 'data.json');
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
+    let FakeDataForExample: Conversation[] = [];
+
+    try {
+        const data = fs.readFileSync(filePath, 'utf8');
+        if (data ) FakeDataForExample = JSON.parse(data);
+        else FakeDataForExample = getData();
+    } catch (err) {
+        console.log(err);
+    }
+
+    fs.writeFileSync(filePath, JSON.stringify(FakeDataForExample));
+
     return NextResponse.json({ data: FakeDataForExample });
+};
+
+export const POST = async (request: Request) => {
+    const { id, body } = await request.json();
+    let FakeDataForExample: Conversation[] = [];
+
+    try {
+        const data = fs.readFileSync(filePath, 'utf8');
+        FakeDataForExample = JSON.parse(data);
+    } catch (err) {
+        console.error(err);
+    }
+
+    const conversationIndex = FakeDataForExample.map((item) => item.id).indexOf(id);
+    const lastMessageIndex = FakeDataForExample[conversationIndex].messages.length - 1;
+    const nweBubble = {
+        time: new Date(),
+        isAction: false,
+        sentVia: getRandomMessagingMethod(),
+        body,
+        isReply: true,
+    };
+
+    FakeDataForExample[conversationIndex].lastMessage = timeFormatting(new Date());
+    FakeDataForExample[conversationIndex].messages[lastMessageIndex].chat.push(nweBubble);
+
+    fs.writeFileSync(filePath, JSON.stringify(FakeDataForExample));
+
+    return NextResponse.json({
+        data: FakeDataForExample[conversationIndex].messages[lastMessageIndex],
+    });
 };

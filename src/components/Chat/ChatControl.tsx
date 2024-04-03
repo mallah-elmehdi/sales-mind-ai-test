@@ -1,7 +1,8 @@
-import { Box, Button, ButtonGroup, Grid, MenuItem, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import BorderedCard from './BorderedCard';
+import BorderedCard from '@/components/BorderedCard';
+import { Chat, Message } from '@/types/conversation';
 import { Send } from '@mui/icons-material';
+import { Button, ButtonGroup, Grid, MenuItem, TextField } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 
 const buttonStyling = { textTransform: 'lowercase', width: '100%' };
 const getVariant = (isValid: boolean) => {
@@ -9,7 +10,7 @@ const getVariant = (isValid: boolean) => {
     return 'outlined';
 };
 
-const ChatControl = () => {
+const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message: Message) => void }) => {
     const [type, setType] = useState('ICE_BREAKER');
     const [variant, setVariant] = useState(0);
     const [text, setText] = useState('');
@@ -22,6 +23,18 @@ const ChatControl = () => {
     };
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setText(event.target.value);
+    };
+
+    const handleSendMessage = () => {
+        fetch(`http://localhost:3000/api/conversations`, {
+            method: 'POST',
+            body: JSON.stringify({
+                body: text,
+                id: id,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => onNewMessage(data.data));
     };
 
     useEffect(() => {
@@ -80,7 +93,7 @@ const ChatControl = () => {
                 </BorderedCard>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="contained" fullWidth startIcon={<Send />}>
+                <Button variant="contained" onClick={() => handleSendMessage()} fullWidth startIcon={<Send />}>
                     Send
                 </Button>
             </Grid>

@@ -4,6 +4,7 @@ import Card from '../Card';
 import { Chat, SentViaEnum } from '@/types/conversation';
 import SalesMindAILogo from '@/assets/items/sales-mind-ai-logo.png';
 import { Email, Face, LinkedIn, PersonOutline } from '@mui/icons-material';
+import { timeFormatting } from '@/utils/helpers';
 
 type ChatBubbleType = {
     name: string;
@@ -49,10 +50,18 @@ const ChatBubble = ({ sx, name, avatar, direction, message, isLastMessage }: Cha
     return message.isAction ? (
         <Typography sx={{ mb: 1 }} color="grey.700" textAlign={textAlign}>
             {name} {message.status}
-            <MessageTime> {message.time}</MessageTime>
+            <MessageTime> {timeFormatting(message.time)}</MessageTime>
         </Typography>
     ) : (
-        <Stack direction="row" spacing={1} alignSelf={direction} flexGrow={1} width="100%" maxWidth={{ md: '70%', xs: '40rem' }}>
+        <Stack
+            direction="row"
+            spacing={1}
+            alignSelf={direction}
+            // sx={{ ml: 'auto' }}
+            flexGrow={1}
+            width="100%"
+            maxWidth={{ md: '70%', xs: '40rem' }}
+        >
             <Avatar src={avatar} sx={{ opacity: isLastMessage ? 0 : 1 }} />
 
             <Stack flexGrow={1}>
@@ -67,7 +76,7 @@ const ChatBubble = ({ sx, name, avatar, direction, message, isLastMessage }: Cha
                 >
                     <Stack direction={row} alignItems="center" sx={{ mb: 1 }} spacing={1} justifyContent="space-between">
                         <Stack direction="row" spacing={0.25} alignItems="center">
-                            {message.sentVia.map((item) => getIcon(item))}
+                            {message.sentVia !== undefined && message.sentVia.map((item) => getIcon(item))}
                         </Stack>
                         <Typography textAlign={textAlign} fontSize="large" fontWeight="semibold">
                             {name}
@@ -75,7 +84,7 @@ const ChatBubble = ({ sx, name, avatar, direction, message, isLastMessage }: Cha
                     </Stack>
                     <Typography fontWeight="light">{message.body}</Typography>
                 </Card>
-                <MessageTime>{message.time}</MessageTime>
+                <MessageTime>{timeFormatting(message.time)}</MessageTime>
             </Stack>
         </Stack>
     );
