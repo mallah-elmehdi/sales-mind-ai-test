@@ -23,7 +23,7 @@ import { v4 as getUuid } from 'uuid';
 const getFakeChat = () => {
     let chat = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
         if (i % 3) {
             chat.push({
                 time: getRandomDate(),
@@ -51,7 +51,7 @@ const getFakeChat = () => {
 const getMessages = () => {
     let FakeMessagesForExample = [];
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 2; i++) {
         FakeMessagesForExample.push({
             date: getRandomDate(),
             chat: getFakeChat(),
@@ -63,7 +63,7 @@ const getMessages = () => {
 
 const getData = () => {
     let data = [];
-    for (let i = 0; i < 33; i++) {
+    for (let i = 0; i < 10; i++) {
         data.push({
             id: getUuid(),
             lead: {
