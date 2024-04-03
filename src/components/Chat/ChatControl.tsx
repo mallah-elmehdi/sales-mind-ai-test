@@ -58,14 +58,14 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
     }, [type, variant]);
 
     return (
-        <Grid container gap={1} width="100%">
-            <Grid item xs={4}>
+        <Grid container spacing={1} width="100%">
+            <Grid item sm={4} xs={12}>
                 <TextField sx={{ width: '100%' }} value={type} onChange={handleTypeChange} select label="Reply type">
                     <MenuItem value="ICE_BREAKER">Ice Breaker</MenuItem>
                     <MenuItem value="REMINDER">Reminder</MenuItem>
                 </TextField>
             </Grid>
-            <Grid item xs={7.75}>
+            <Grid item sm={8} xs={12}>
                 <ButtonGroup sx={{ height: '100%', width: '100%' }}>
                     <Button onClick={() => handleVariantChange(0)} variant={getVariant(variant === 0)} sx={buttonStyling}>
                         Variant 1
@@ -94,7 +94,13 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
                         value={text}
                         onChange={handleTextChange}
                     />
-                    <Stack direction="row" spacing={1} mt={2} justifyContent="space-between" alignItems="center">
+                    <Stack
+                        direction={{ sm: 'row', xs: 'column' }}
+                        spacing={2}
+                        mt={2}
+                        justifyContent="space-between"
+                        alignItems={{ sm: 'center', xs: 'flex-start' }}
+                    >
                         <Stack direction="row" spacing={1} mt={2} alignItems="center">
                             <EmojiMenu addEmoji={(emoji) => setText(text + emoji)} />
                             <AttachedFileMenu />

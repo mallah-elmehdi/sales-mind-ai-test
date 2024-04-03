@@ -5,7 +5,7 @@ import React from 'react';
 
 const Filter = () => {
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={{ md: 1, xs: 3 }}>
             {/* ---------- FILTER */}
             <Grid item md={3} sm={6} xs={12}>
                 <TextField sx={{ width: '100%' }} label="Search" placeholder="Name, company or title" />

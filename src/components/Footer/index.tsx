@@ -11,7 +11,7 @@ const Footer = () => {
                 backgroundColor: 'white',
             }}
         >
-            <Toolbar>
+            <Toolbar sx={{ flexDirection: { sm: 'row', xs: 'column' }, alignItems: { sm: 'center', xs: 'flex-start' } }}>
                 {FOOTER_MENU.map((item) => (
                     <Link href={item.url} key={item.title}>
                         <Button>{item.title}</Button>
