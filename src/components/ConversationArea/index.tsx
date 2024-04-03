@@ -19,7 +19,7 @@ const ConversationArea = ({ data }: { data: Conversation[] }) => {
     const [conversation, setConversation] = React.useState<Conversation | null>(null);
     const [openDrawer, setOpenDrawer] = React.useState(false);
 
-    const handleOpenConversation = useCallback((id: string) => setConversation(data.find((item) => item.id === id) || null), []);
+    const handleOpenConversation = useCallback((id: string) => setConversation(data.find((item) => item.id === id) || null), [data]);
     const handleCloseConversation = () => setConversation(null);
     const toggleDrawer = (newOpen: boolean) => setOpenDrawer(newOpen);
 

@@ -11,7 +11,7 @@ const ChatArea = ({ lead, messages, sender, id }: ChatBodyType) => {
 
     useEffect(() => {
         setMessagesStack(messages);
-    }, [id]);
+    }, [id, messages]);
 
     useEffect(() => {
         var chatBody = document.getElementById('chat-body');

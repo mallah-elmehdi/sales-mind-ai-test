@@ -30,12 +30,12 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
         setText(event.target.value);
     };
 
-    const handleSendMessage = useCallback((text: string) => {
+    const handleSendMessage = useCallback((text: string, id: string) => {
         fetch(`http://localhost:3000/api/conversations`, {
             method: 'POST',
             body: JSON.stringify({
                 body: text,
-                id: id,
+                id,
             }),
         })
             .then((response) => response.json())
@@ -131,7 +131,7 @@ const ChatControl = ({ id, onNewMessage }: { id: string; onNewMessage: (message:
                 </BorderedCard>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="contained" onClick={() => handleSendMessage(text)} fullWidth startIcon={<Send />}>
+                <Button variant="contained" onClick={() => handleSendMessage(text, id)} fullWidth startIcon={<Send />}>
                     Send
                 </Button>
             </Grid>
